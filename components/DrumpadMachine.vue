@@ -1,14 +1,10 @@
 <template>
-    <div id="drum-machine" 
+    <div id="drum-machine">
 
 
-        
-        >
-        
-        
 
         <div id="pads">
-            <button @click="playSound('heater1')" @keydown.q="onKeyDown" ref="Q" class="drum-pad" id="Q">Q</button>
+            <button @click="playSound('heater1')" ref="Q" class="drum-pad" id="Q">Q</button>
             <button @click="playSound('heater2')" ref="W" class="drum-pad" id="W">W</button>
             <button @click="playSound('heater3')" ref="E" class="drum-pad" id="E">E</button>
             <button @click="playSound('heater4')" ref="A" class="drum-pad" id="A">A</button>
@@ -31,9 +27,6 @@
 export default {
     data() {
         return {
-
-            audio: new Audio("")
-            ,
             sounds: {
                 heater1: "https://cdn.freecodecamp.org/testable-projects-fcc/audio/Heater-1.mp3",
                 heater2: "https://cdn.freecodecamp.org/testable-projects-fcc/audio/Heater-2.mp3",
@@ -48,22 +41,53 @@ export default {
 
         }
     },
+    mounted() {
+        window.addEventListener("keydown", this.onKeyDown)
+    },
     methods: {
         playSound(soundName) {
             let audio = new Audio(this.sounds[soundName])
             audio.load()
             audio.play()
         },
-        
-        clickQ() {
-            this.$refs.Q.click()
+
+
+        clickk(ref) {
+           ref.focus()
+           ref.click()
+           
         },
 
         onKeyDown(e) {
 
-if(e.key==='q') {
-    this.clickQ()
-}
+            if (e.key === 'q' || e.key === 'Q') {
+                this.clickk(Q)
+            }
+
+            else if (e.key === 'w' || e.key === 'W') {
+                this.clickk(W)
+            }
+            else if (e.key === 'e' || e.key === 'E') {
+                this.clickk(E)
+            }
+            else if (e.key === 'a' || e.key === 'A') {
+                this.clickk(A)
+            }
+            else if (e.key === 's' || e.key === 'S') {
+                this.clickk(S)
+            }
+            else if (e.key === 'd' || e.key === 'D') {
+                this.clickk(D)
+            }
+            else if (e.key === 'z' || e.key === 'Z') {
+                this.clickk(Z)
+            }
+            else if (e.key === 'x' || e.key === 'X') {
+                this.clickk(X)
+            }
+            else if (e.key === 'c' || e.key === 'C') {
+                this.clickk(C)
+            }
 
         }
     }
@@ -104,7 +128,7 @@ if(e.key==='q') {
     margin: auto;
 }
 
-button {
+.drum-pad {
     align-items: center;
     appearance: none;
     background-color: #8787a2;
@@ -135,17 +159,20 @@ button {
     font-size: 18px;
 }
 
-button:focus {
-    box-shadow: #D6D6E7 0 0 0 1.5px inset, rgba(45, 35, 66, 0.4) 0 2px 4px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
+.drum-pad:focus {
+    transform: translateY(2.9px);
+    outline: none;
+    box-shadow: #D6D6E7 0 0 0 2px inset, rgba(45, 35, 66, 0.4) 0 2px 4px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
 }
 
-button:hover {
+.drum-pad:hover {
     box-shadow: rgba(45, 35, 66, 0.4) 0 4px 8px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
     transform: translateY(-2px);
 }
 
-button:active {
+.drum-pad:active {
     box-shadow: #D6D6E7 0 3px 7px inset;
     transform: translateY(2px);
 }
+
 </style>
