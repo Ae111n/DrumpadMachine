@@ -13,11 +13,15 @@
             <button @click="playSound('kickNHat')" ref="Z" class="drum-pad" id="Z">Z</button>
             <button @click="playSound('kick')" ref="X" class="drum-pad" id="X">X</button>
             <button @click="playSound('closedHH')" ref="C" class="drum-pad" id="C">C</button>
-
         </div>
 
         <div id="display">
-
+<div id="sound-name">
+    {{ CurrentSound }}
+</div>
+<div id="slider">
+<input v-model="currentVolume" type="range" id="volumeFader" name="volume" min="0" max="1" value="1" step="0.1" oninput="setUserVolume(this.value)">
+</div>
         </div>
 
     </div>
@@ -37,7 +41,10 @@ export default {
                 kickNHat: "https://cdn.freecodecamp.org/testable-projects-fcc/audio/Kick_n_Hat.mp3",
                 kick: "https://cdn.freecodecamp.org/testable-projects-fcc/audio/RP4_KICK_1.mp3",
                 closedHH: "https://cdn.freecodecamp.org/testable-projects-fcc/audio/Cev_H2.mp3"
-            }
+            },
+
+            CurrentSound:'...',
+            currentVolume:'1'
 
         }
     },
@@ -47,15 +54,21 @@ export default {
     methods: {
         playSound(soundName) {
             let audio = new Audio(this.sounds[soundName])
+            audio.volume = this.currentVolume
             audio.load()
             audio.play()
+            ,
+            this.CurrentSound = soundName
+        },
+        setUserVolume(n) {
+
         },
 
 
         clickk(ref) {
-           ref.focus()
-           ref.click()
-           
+            ref.focus()
+            ref.click()
+
         },
 
         onKeyDown(e) {
@@ -96,6 +109,33 @@ export default {
 </script>
 
 <style>
+#sound-name {
+    font-size: 28px;
+    font-family:  sans-serif;
+    margin: auto;
+    border: 1px solid grey ;
+    width: 160px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+
+}
+#display {
+    border: 1px solid green;
+    width: 450px;
+    height: 350px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    
+}
+#slider {
+border: 1px solid grey ;
+height: 20px;
+margin: auto;
+}
 #drum-machine {
     border: 1px solid black;
     width: 900px;
@@ -121,12 +161,7 @@ export default {
     margin: 10px;
 }
 
-#display {
-    border: 1px solid green;
-    width: 450px;
-    height: 350px;
-    margin: auto;
-}
+
 
 .drum-pad {
     align-items: center;
@@ -174,5 +209,4 @@ export default {
     box-shadow: #D6D6E7 0 3px 7px inset;
     transform: translateY(2px);
 }
-
 </style>
