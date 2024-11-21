@@ -1,12 +1,10 @@
 <template>
-<DrumpadMachine></DrumpadMachine>
+  <DrumpadMachine></DrumpadMachine>
 </template>
 
 <script>
 export default {
   name: 'IndexPage',
-
-  
 
 }
 </script>

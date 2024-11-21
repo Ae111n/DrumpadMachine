@@ -28,7 +28,7 @@ export default {
     data() {
         return {
             sounds: {
-                heater1: "https://cdn.freecodecamp.org/testable-projects-fcc/audio/Heater-1.mp3",
+                heater1:"https://cdn.freecodecamp.org/testable-projects-fcc/audio/Heater-1.mp3",
                 heater2: "https://cdn.freecodecamp.org/testable-projects-fcc/audio/Heater-2.mp3",
                 heater3: "https://cdn.freecodecamp.org/testable-projects-fcc/audio/Heater-3.mp3",
                 heater4: "https://cdn.freecodecamp.org/testable-projects-fcc/audio/Heater-4_1.mp3",
@@ -49,13 +49,10 @@ export default {
         playSound(soundName) {
             let audio = new Audio(this.sounds[soundName])
             audio.volume = this.currentVolume
-            audio.load()
             audio.play(),
                 this.currentSound = soundName
         },
-        setUserVolume(n) {
 
-        },
         clickButton(ref) {
             ref.focus()
             ref.click()
